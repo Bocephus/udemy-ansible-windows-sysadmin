@@ -1,0 +1,15 @@
+---
+- name: win_chocolatey module demo
+  hosts: windows
+  become: false
+  gather_facts: false
+  vars:
+    packages:
+      - git
+      - notepadplusplus
+      - 7zip
+  tasks:
+    - name: Install Chocolatey packages
+      chocolatey.chocolatey.win_chocolatey:
+        name: "{{ packages }}"
+        state: present
