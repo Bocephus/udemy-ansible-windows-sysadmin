@@ -1,0 +1,15 @@
+localhost ansible_connection=local
+
+[windows]
+W25G-TEST01 ansible_host=10.100.30.79
+W25G-TEST02 ansible_host=10.100.30.84
+W25C-TEST01 ansible_host=10.100.30.58
+W25C-TEST02 ansible_host=10.100.30.52
+
+[windows:vars]
+ansible_user=ansible-local
+ansible_password=Start123!
+ansible_port=5986
+ansible_connection=winrm
+ansible_winrm_transport=ntlm
+ansible_winrm_server_cert_validation=ignore
