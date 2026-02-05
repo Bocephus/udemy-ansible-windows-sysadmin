@@ -1,17 +1,13 @@
 ---
-- name: win_chocolatey module demo
+- name: install Docker
   hosts: windows
   become: false
   gather_facts: false
   vars:
     packages:
-      - git
-      - notepadplusplus
-      - 7zip
-      - pwsh
-      - nano
+      - docker-desktop
   tasks:
-    - name: Install Chocolatey packages
+    - name: Install Docker using Chocolatey
       chocolatey.chocolatey.win_chocolatey:
         name: "{{ packages }}"
         state: present

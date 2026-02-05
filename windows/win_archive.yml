@@ -1,0 +1,21 @@
+---
+- name: win_unzip module demo
+  hosts: windows
+  become: false
+  gather_facts: false
+  vars:
+    src_zip: 'C:\Users\Administrator\Desktop\sample.zip'
+    dest_dir: 'C:\Users\Administrator\Desktop\unzipped_files'
+    src_file: 'examples.zip'
+    dest_file: 'C:\Users\Administrator\Desktop\sample.zip'
+
+  tasks:
+    - name: Copy a zip file to Windows host
+      ansible.windows.win_copy:
+        src: "{{ src_file }}"
+        dest: "{{ dest_file }}"
+
+    - name: Unzip a file on Windows host
+      community.windows.win_unzip:
+        src: "{{ src_zip }}"
+        dest: "{{ dest_dir }}"
