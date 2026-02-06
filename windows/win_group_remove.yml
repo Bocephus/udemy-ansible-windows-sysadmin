@@ -1,0 +1,15 @@
+---
+- name: win_group module remove demo
+  hosts: windows
+  become: false
+  gather_facts: false
+  vars:
+    grp_name: 'Ansible Group'
+
+  tasks:
+    - name: Create or update Windows Group
+      ansible.windows.win_group:
+        name: "{{ grp_name }}"
+        state: absent
+
+# https://docs.ansible.com/projects/ansible/latest/collections/ansible/windows/win_group_module.html

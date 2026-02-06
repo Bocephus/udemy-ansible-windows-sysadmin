@@ -1,0 +1,19 @@
+---
+- name: win_reg_stat module demo
+  hosts: windows
+  become: false
+  gather_facts: false
+  vars:
+    reg_path: 'HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full'
+    reg_name: 'Version'
+  tasks:
+    - name: Check if a registry key exists on Windows host
+      ansible.windows.win_reg_stat:
+        path: "{{ reg_path }}"
+        name: "{{ reg_name }}"
+      register: reg_stat
+
+    - name: print .NET version
+      ansible.builtin.debug:
+        msg: "The .NET Framework version is {{ reg_stat.value }}"
+      when: reg_stat.exists

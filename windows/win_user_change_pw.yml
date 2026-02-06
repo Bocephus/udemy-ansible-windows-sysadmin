@@ -1,0 +1,16 @@
+---
+- name: win_user module pw change demo
+  hosts: windows
+  become: false
+  gather_facts: false
+  vars:
+    user_name: 'testuser'
+    user_password: 'St@rt123!'
+
+
+  tasks:
+    - name: Change password
+      ansible.windows.win_user:
+        name: "{{ user_name }}"
+        password: "{{ user_password }}"
+        update_password: always # Only sets password, if it is creating the account. If just updating, the password is not changed.

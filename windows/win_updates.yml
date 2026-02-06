@@ -1,0 +1,26 @@
+---
+- name: win_updates module demo
+  hosts: windows
+  become: false
+  gather_facts: false
+  tasks:
+    - name: Check for available Windows updates
+      ansible.windows.win_updates:
+        category_names:
+          - SecurityUpdates
+          - CriticalUpdates
+          - UpdateRollups
+        state: installed
+        reboot: true
+        log_path: C:\ansible.log
+      register: update_results
+
+    - name: Display available updates
+      ansible.builtin.debug:
+        var: update_results.updates
+      when: update_results.updates | length > 0
+
+    - name: No updates available message
+      ansible.builtin.debug:
+        msg: "No updates are available."
+      when: update_results.updates | length == 0

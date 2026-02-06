@@ -1,0 +1,12 @@
+---
+- name: win_file create directory demo
+  hosts: windows
+  become: false
+  gather_facts: false
+  vars:
+    dir_path: 'C:\Users\Administrator\Desktop\new_directory'
+  tasks:
+    - name: Create a directory on Windows host
+      ansible.windows.win_file:
+        path: "{{ dir_path }}"
+        state: directory

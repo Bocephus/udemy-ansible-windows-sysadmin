@@ -1,0 +1,17 @@
+---
+- name: win_regedit module add demo
+  hosts: windows
+  become: false
+  gather_facts: false
+  vars:
+    reg_path: 'HKLM:\Software\Test'
+    reg_name: 'hello'
+    reg_value: 'world'
+    reg_type: 'string'
+  tasks:
+    - name: Create or update a registry key on Windows host
+      ansible.windows.win_regedit:
+        path: "{{ reg_path }}"
+        name: "{{ reg_name }}"
+        data: "{{ reg_value }}"
+        type: "{{ reg_type }}"
