@@ -1,0 +1,15 @@
+---
+- name: win_shell module demo
+  hosts: windows
+  become: false
+  gather_facts: false
+  tasks:
+    - name: Run a shell command on the Windows host
+      ansible.windows.win_shell: |
+        hostname
+        Get-Date
+      register: shell_output
+
+    - name: Display the shell command output
+      ansible.builtin.debug:
+        var: shell_output.stdout_lines
