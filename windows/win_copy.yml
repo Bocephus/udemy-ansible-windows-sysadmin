@@ -1,0 +1,13 @@
+---
+- name: win_copy module demo
+  hosts: windows
+  become: false
+  gather_facts: false
+  vars:
+    src_file: 'sample.txt'
+    dest_file: 'C:\Users\Administrator\Desktop\sample_copied.txt'
+  tasks:
+    - name: Copy a file to Windows host
+      ansible.windows.win_copy:
+        src: "{{ src_file }}"
+        dest: "{{ dest_file }}"

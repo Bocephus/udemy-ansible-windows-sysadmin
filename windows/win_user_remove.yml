@@ -1,0 +1,13 @@
+---
+- name: win_user module add demo
+  hosts: windows
+  become: false
+  gather_facts: false
+  vars:
+    user_name: 'testuser'
+
+  tasks:
+    - name: Create or update Windows User
+      ansible.windows.win_user:
+        name: "{{ user_name }}"
+        state: absent

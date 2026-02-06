@@ -1,0 +1,14 @@
+---
+- name: win_command module demo
+  hosts: windows
+  become: false
+  gather_facts: false
+  tasks:
+    - name: Run a command on the Windows host
+      # ansible.windows.win_command: "echo Hello, World!"
+      ansible.windows.win_command: "netstat -e"
+      register: command_output
+
+    - name: Display the command output
+      ansible.builtin.debug:
+        var: command_output.stdout.lines

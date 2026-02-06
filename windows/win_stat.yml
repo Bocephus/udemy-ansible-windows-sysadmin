@@ -1,0 +1,17 @@
+---
+- name: check if directory exists demo
+  hosts: windows
+  become: false
+  gather_facts: false
+  vars:
+    file_path: 'C:\Users\Administrator\Desktop\New_Directory'
+  tasks:
+    - name: Check if a directory exists on Windows host
+      ansible.windows.win_stat:
+        path: "{{ file_path }}"
+      register: dir_stat
+
+    - name: Directory found
+      ansible.builtin.debug:
+        msg: "The directory exists at {{ file_path }}"
+      when: dir_stat.stat.exists and dir_stat.stat.isdir

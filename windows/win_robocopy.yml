@@ -1,0 +1,15 @@
+---
+- name: win_robocopy module demo
+  hosts: windows
+  become: false
+  gather_facts: false
+  vars:
+    src: 'C:\Users\Administrator\Desktop\unzipped_files'
+    dest: 'C:\Users\Administrator\Desktop\new_directory'
+    options: '/MIR /Z'
+
+  tasks:
+    - name: Copy files using robocopy
+      community.windows.win_robocopy:
+        src: "{{ src }}"
+        dest: "{{ dest }}"

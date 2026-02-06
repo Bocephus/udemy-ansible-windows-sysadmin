@@ -1,0 +1,25 @@
+---
+- name: win_user module add demo
+  hosts: windows
+  become: false
+  gather_facts: false
+  vars:
+    user_name: 'testuser'
+    full_name: 'Test User'
+    description: 'This is a test user account created by Ansible'
+    user_password: 'P@ssw0rd!'
+
+
+  tasks:
+    - name: Create or update Windows User
+      ansible.windows.win_user:
+        name: "{{ user_name }}"
+        fullname: "{{ full_name }}"
+        description: "{{ description }}"
+        password: "{{ user_password }}"
+        update_password: on_create # Only sets password, if it is creating the account. If just updating, the password is not changed.
+        state: present
+        groups:
+          - Users
+        password_never_expires: true
+        user_cannot_change_password: true

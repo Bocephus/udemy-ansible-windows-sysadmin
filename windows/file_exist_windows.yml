@@ -1,0 +1,22 @@
+---
+- name: check if file exists on Windows
+  hosts: windows
+  become: false
+  gather_facts: false
+  vars:
+    myfile: 'C:\Users\Administrator\Desktop\example.txt'
+  tasks:
+    - name: Check if the file exists
+      ansible.windows.win_stat:
+        path: "{{ myfile }}"
+      register: file_data
+
+    - name: report file exist
+      ansible.builtin.debug:
+        msg: "File exists: {{ myfile }}"
+      when: file_data.stat.exists
+
+    - name: report file not exist
+      ansible.builtin.debug:
+        msg: "The file {{ myfile }} does not exist."
+      when: not file_data.stat.exists

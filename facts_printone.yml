@@ -1,9 +1,0 @@
----
-- name: facts_printone
-  hosts: all
-  gather_facts: true
-
-  tasks:
-  - name: Print a fact
-    ansible.builtin.debug:
-      var: ansible_architecture

@@ -1,0 +1,13 @@
+---
+- name: install Docker
+  hosts: windows
+  become: false
+  gather_facts: false
+  vars:
+    packages:
+      - docker-desktop
+  tasks:
+    - name: Install Docker using Chocolatey
+      chocolatey.chocolatey.win_chocolatey:
+        name: "{{ packages }}"
+        state: present

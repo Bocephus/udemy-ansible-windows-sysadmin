@@ -1,0 +1,13 @@
+---
+- name: win_get_url module demo
+  hosts: windows
+  become: false
+  gather_facts: false
+  vars:
+    url: 'https://github.com/ansible/ansible/archive/refs/tags/v2.20.2.tar.gz'
+    dest_path: 'C:\Users\Administrator\Desktop\ansible-2.20.2.tar.gz'
+  tasks:
+    - name: download file
+      ansible.windows.win_get_url:
+        url: "{{ url }}"
+        dest: "{{ dest_path }}"

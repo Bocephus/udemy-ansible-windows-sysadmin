@@ -1,0 +1,20 @@
+---
+- name: win_group module add demo
+  hosts: windows
+  become: false
+  gather_facts: false
+  vars:
+    grp_name: 'Ansible Group'
+    grp_description: 'Test Group created by Ansible'
+
+  tasks:
+    - name: Create or update Windows Group
+      ansible.windows.win_group:
+        name: "{{ grp_name }}"
+        description: "{{ grp_description }}"
+        state: present
+        members:
+          add:
+            - testuser
+
+# https://docs.ansible.com/projects/ansible/latest/collections/ansible/windows/win_group_module.html
